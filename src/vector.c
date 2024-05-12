@@ -3,24 +3,32 @@
 #include <stdlib.h>
 #include <vector.h>
 
-void vec_sum(vec3* v1, vec3 v2) {
+void vec_sum_m(vec3* v1, vec3 v2) {
     v1->x += v2.x;
     v1->y += v2.y;
     v1->z += v2.z;
 }
 
-void vec_mul(vec3* v, double t) {
+void vec_mul_m(vec3* v, double t) {
     v->x *= t;
     v->y *= t;
     v->z *= t;
 }
 
-void vec_div(vec3* v, double t) {
-    vec_mul(v, 1.0 / t);
+void vec_div_m(vec3* v, double t) {
+    vec_mul_m(v, 1.0 / t);
 }
 
 vec3 vec_negate(vec3 v) {
     return (vec3){-v.x, -v.y, -v.z};
+}
+
+vec3 vec_sum(vec3 v1, vec3 v2) {
+    return (vec3){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
+}
+
+vec3 vec_mul(vec3 v, double t) {
+    return (vec3){v.x * t, v.y * t, v.z * t};
 }
 
 double length(vec3 v) {

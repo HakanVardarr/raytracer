@@ -1,4 +1,7 @@
 #include <color.h>
+#include <ray.h>
+#include <vector.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,7 +24,6 @@ int main(int argc, char** argv) {
         fprintf(stderr, "Cannot open file for writing: %s\n", argv[1]);
         return 1;
     }
-
     setup_ppm(outfile);
 
     for (int i = 0; i < IMAGE_HEIGTH; i++) {

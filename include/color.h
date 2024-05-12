@@ -2,7 +2,6 @@
 #define __COLOR_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <vector.h>
 
 typedef vec3 color;
