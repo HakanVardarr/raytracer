@@ -16,7 +16,7 @@ void vec_mul_m(vec3* v, double t) {
 }
 
 void vec_div_m(vec3* v, double t) {
-    vec_mul_m(v, 1.0 / t);
+    vec_mul_m(v, 1.0f / t);
 }
 
 vec3 vec_negate(vec3 v) {
@@ -27,15 +27,27 @@ vec3 vec_sum(vec3 v1, vec3 v2) {
     return (vec3){v1.x + v2.x, v1.y + v2.y, v1.z + v2.z};
 }
 
+vec3 vec_sub(vec3 v1, vec3 v2) {
+    return (vec3){v1.x - v2.x, v1.y - v2.y, v1.z - v2.z};
+}
+
 vec3 vec_mul(vec3 v, double t) {
     return (vec3){v.x * t, v.y * t, v.z * t};
 }
 
-double length(vec3 v) {
-    return sqrt(length_squared(v));
+vec3 vec_div(vec3 v, double t) {
+    return vec_mul(v, 1.0f / t);
 }
 
-double length_squared(vec3 v) {
+vec3 vec_unit(vec3 v) {
+    return vec_div(v, vec_length(v));
+}
+
+double vec_length(vec3 v) {
+    return sqrt(vec_length_squared(v));
+}
+
+double vec_length_squared(vec3 v) {
     return v.x * v.x + v.y * v.y + v.z * v.z;
 }
 
