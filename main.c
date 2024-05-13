@@ -2,6 +2,7 @@
 #include <ray.h>
 #include <vector.h>
 
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +28,7 @@
 #define DOUBLE_DIV(a, b) (double)(a) / (double)(b)
 
 void setup_ppm(FILE* outfile);
-bool hit_sphere(point3 center, double radius, ray r);
+double hit_sphere(point3 center, double radius, ray r);
 color ray_color(ray r);
 
 int main(int argc, char** argv) {
@@ -66,19 +67,26 @@ void setup_ppm(FILE* outfile) {
     free(buffer);
 }
 
-bool hit_sphere(point3 center, double radius, ray r) {
+double hit_sphere(point3 center, double radius, ray r) {
     vec3 oc = vec_sub(center, r.orig);
     double a = vec_dot(r.dir, r.dir);
     double b = -2.0f * vec_dot(r.dir, oc);
     double c = vec_dot(oc, oc) - radius * radius;
 
     double discriminant = b * b - 4.0f * a * c;
-    return (discriminant >= 0.0f);
+    if (discriminant < 0.0f) {
+        return -1.0f;
+    }
+    return (-b - sqrt(discriminant)) / (2.0f * a);
 }
 
 color ray_color(ray r) {
-    if (hit_sphere((point3){0.0f, 0.0f, -1.0f}, 0.5f, r)) {
-        return (color){1.0f, 0.0f, 0.0f};
+    point3 sphere_center = {0.0f, 0.0f, -1.0f};
+
+    double t = hit_sphere(sphere_center, 0.5f, r);
+    if (t > 0.0) {
+        vec3 N = vec_unit(vec_sub(ray_at(r, t), sphere_center));
+        return vec_mul((color){N.x + 1, N.y + 1, N.z + 1}, 0.5f);
     }
 
     vec3 unit_direction = vec_unit(r.dir);

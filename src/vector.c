@@ -3,22 +3,6 @@
 #include <stdlib.h>
 #include <vector.h>
 
-void vec_sum_m(vec3* v1, vec3 v2) {
-    v1->x += v2.x;
-    v1->y += v2.y;
-    v1->z += v2.z;
-}
-
-void vec_mul_m(vec3* v, double t) {
-    v->x *= t;
-    v->y *= t;
-    v->z *= t;
-}
-
-void vec_div_m(vec3* v, double t) {
-    vec_mul_m(v, 1.0f / t);
-}
-
 vec3 vec_negate(vec3 v) {
     return (vec3){-v.x, -v.y, -v.z};
 }

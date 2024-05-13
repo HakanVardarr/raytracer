@@ -7,10 +7,6 @@ typedef struct {
 
 typedef vec3 point3;
 
-void vec_sum_m(vec3* v1, vec3 v2);
-void vec_mul_m(vec3* v, double t);
-void vec_div_m(vec3* v, double t);
-
 vec3 vec_negate(vec3 v);
 vec3 vec_sum(vec3 v1, vec3 v2);
 vec3 vec_sub(vec3 v1, vec3 v2);
