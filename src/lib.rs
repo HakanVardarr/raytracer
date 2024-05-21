@@ -1,6 +1,8 @@
 use std::fs::OpenOptions;
 
 mod error;
+#[cfg(test)]
+mod test;
 mod vec;
 
 use error::Error;
